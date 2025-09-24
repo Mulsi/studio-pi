@@ -21,8 +21,8 @@ export default defineNuxtConfig({
   // SEO Configuration
   app: {
     head: {
-      title: 'Studio PI - Architecture & Design Practice',
-      titleTemplate: '%s | Studio PI',
+      title: 'Studio PI',
+      titleTemplate: '%s',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
