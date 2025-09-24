@@ -1,42 +1,5 @@
 <template>
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Studio PI",
-      "alternateName": "Studio PI Architecture & Design",
-      "description": "Multidisciplinary architecture and design practice based in Zagreb, creating human-centric spaces that enhance wellbeing.",
-      "url": "https://studiopi.eu",
-      "logo": "https://studiopi.eu/logo.png",
-      "image": "https://studiopi.eu/img/hero.png",
-      "foundingDate": "2025",
-      "founder": {
-        "@type": "Person",
-        "name": "Iva Pauzar"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Zagreb",
-        "addressCountry": "Croatia"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "email": "studio@studiopi.eu",
-        "contactType": "business inquiries"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/company/studiopieu/",
-        "https://www.instagram.com/studiopi.eu/",
-        "https://substack.com/@ivapauzar"
-      ],
-      "areaServed": "Europe",
-      "serviceType": ["Architecture", "Interior Design", "Spatial Design", "Product Design"],
-      "knowsAbout": ["Architecture", "Design", "Spatial Interventions", "Wellbeing Design", "Contemporary Design"]
-    }
-  </script>
-
-  <header ref="header" class="sticky top-0 z-50 bg-white transition-all duration-300 ease-out"
+  <header class="sticky top-0 z-50 bg-white transition-all duration-300 ease-out"
     :class="{ 'py-4': !isScrolledDown, 'py-2': isScrolledDown }">
     <div class="w-full px-3 md:px-8">
       <img src="/logo.png" alt="Studio PI" class="h-auto transition-all duration-300 ease-out"
@@ -100,7 +63,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const header = ref(null)
 const isScrolledDown = ref(false)
 
 const handleScroll = () => {
