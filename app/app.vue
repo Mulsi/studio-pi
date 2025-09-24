@@ -1,14 +1,51 @@
 <template>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Studio PI",
+      "alternateName": "Studio PI Architecture & Design",
+      "description": "Multidisciplinary architecture and design practice based in Zagreb, creating human-centric spaces that enhance wellbeing.",
+      "url": "https://studiopi.eu",
+      "logo": "https://studiopi.eu/logo.png",
+      "image": "https://studiopi.eu/img/hero.png",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Iva Pauzar"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Zagreb",
+        "addressCountry": "Croatia"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "studio@studiopi.eu",
+        "contactType": "business inquiries"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/studiopieu/",
+        "https://www.instagram.com/studiopi.eu/",
+        "https://substack.com/@ivapauzar"
+      ],
+      "areaServed": "Europe",
+      "serviceType": ["Architecture", "Interior Design", "Spatial Design", "Product Design"],
+      "knowsAbout": ["Architecture", "Design", "Spatial Interventions", "Wellbeing Design", "Contemporary Design"]
+    }
+  </script>
+
   <header ref="header" class="sticky top-0 z-50 bg-white transition-all duration-300 ease-out"
     :class="{ 'py-4': !isScrolledDown, 'py-2': isScrolledDown }">
     <div class="w-full px-3 md:px-8">
-      <img src="/logo.png" alt="Studio Pi" class="h-auto transition-all duration-300 ease-out"
+      <img src="/logo.png" alt="Studio PI" class="h-auto transition-all duration-300 ease-out"
         :class="{ 'w-64 md:w-96': !isScrolledDown, 'w-40 md:w-50': isScrolledDown }" />
     </div>
   </header>
   <main>
     <div class="flex w-full h-full items-center justify-center px-4 md:px-8 pb-8">
-      <img src="/img/hero.png" alt="Studio Pi" class="w-full h-full" />
+      <img src="/img/hero.png" alt="Studio PI" class="w-full h-full" />
     </div>
     <div class="w-full px-4 md:px-8 space-y-6">
       <p class="text-l leading-relaxed">
@@ -51,9 +88,9 @@
       </div>
       <div class="pb-8">
         <p class="text-sm text-center text-gray-500 leading-relaxed">
-        <a href="/">
-          &copy; 2025 Studio Pi. All rights reserved.
-        </a>
+          <a href="/">
+            &copy; 2025 Studio PI. All rights reserved.
+          </a>
         </p>
       </div>
     </div>

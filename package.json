@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
+    "@nuxtjs/sitemap": "^7.4.7",
     "@tailwindcss/vite": "^4.1.13",
     "nuxt": "^4.0.3",
     "tailwindcss": "^4.1.13",
