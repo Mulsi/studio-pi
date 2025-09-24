@@ -1,9 +1,11 @@
 <template>
   <header class="sticky top-0 z-50 bg-white transition-all duration-300 ease-out"
-    :class="{ 'py-4': !isScrolledDown, 'py-2': isScrolledDown }">
-    <div class="w-full px-3 md:px-8">
-      <img src="/logo.png" alt="Studio PI" class="h-auto transition-all duration-300 ease-out"
-        :class="{ 'w-64 md:w-96': !isScrolledDown, 'w-40 md:w-50': isScrolledDown }" />
+    :class="{ 'py-4 md:py-8': !isScrolledDown, 'py-2 md:py-4': isScrolledDown }">
+    <div class="w-full flex items-center px-4 md:px-8" :class="{ 'h-8': isScrolledDown, 'h-16': !isScrolledDown }">
+    <a href="/">
+      <img src="/logo.svg" alt="Studio PI" class="transition-all duration-300 ease-out"
+        :class="{ 'w-58 md:w-96': !isScrolledDown, 'w-36 md:w-50': isScrolledDown }" />
+    </a>
     </div>
   </header>
   <main>
