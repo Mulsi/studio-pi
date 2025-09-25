@@ -1,10 +1,10 @@
 <template>
-  <header class="sticky top-0 z-50 bg-white transition-all duration-500 ease-out"
-    :style="{ paddingTop: headerPadding + 'px', paddingBottom: headerPadding + 'px' }">
+  <header class="sticky top-0 z-50 bg-white transition-all duration-300 ease-out"
+    :class="{ 'py-2': isScrolledDown, 'py-4 md:py-8': !isScrolledDown }">
     <div class="w-full flex items-center px-4 md:px-8">
       <a href="/">
-        <img src="/logo.svg" alt="Studio PI" class="transition-all duration-500 ease-out"
-          :style="{ width: logoWidth + 'px' }" />
+        <img src="/logo.svg" alt="Studio PI" class="transition-all duration-300 ease-out"
+          :class="{ 'w-36 md:w-50': isScrolledDown, 'w-58 md:w-96': !isScrolledDown }" />
       </a>
     </div>
   </header>
@@ -65,25 +65,25 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const scrollY = ref(0)
-const headerPadding = ref(32) // Start with 32px padding
-const logoWidth = ref(232) // Start with 232px width (w-58 equivalent)
-
-const SCROLL_THRESHOLD = 50 // Start shrinking after 50px scroll
-const MIN_PADDING = 16 // Minimum padding when fully scrolled
-const MAX_PADDING = 32 // Maximum padding when at top
-const MIN_LOGO_WIDTH = 144 // Minimum logo width (w-36 equivalent)
-const MAX_LOGO_WIDTH = 232 // Maximum logo width (w-58 equivalent)
+const isScrolledDown = ref(false)
+const ticking = ref(false)
+let lastScrollY = 0
 
 const handleScroll = () => {
-  scrollY.value = window.pageYOffset || document.documentElement.scrollTop
+  if (!ticking.value) {
+    requestAnimationFrame(() => {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop
 
-  // Calculate smooth interpolation factor (0 to 1)
-  const scrollProgress = Math.min(scrollY.value / SCROLL_THRESHOLD, 1)
+      // Only update if scroll position changed significantly (reduces unnecessary updates)
+      if (Math.abs(scrollY - lastScrollY) > 5) {
+        isScrolledDown.value = scrollY > 50
+        lastScrollY = scrollY
+      }
 
-  // Smooth interpolation between min and max values
-  headerPadding.value = MAX_PADDING - (MAX_PADDING - MIN_PADDING) * scrollProgress
-  logoWidth.value = MAX_LOGO_WIDTH - (MAX_LOGO_WIDTH - MIN_LOGO_WIDTH) * scrollProgress
+      ticking.value = false
+    })
+    ticking.value = true
+  }
 }
 
 onMounted(() => {
