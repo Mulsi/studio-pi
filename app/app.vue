@@ -1,11 +1,11 @@
 <template>
-  <header class="sticky top-0 z-50 bg-white transition-all duration-300 ease-out"
-    :class="{ 'py-4 md:py-8': !isScrolledDown, 'py-2 md:py-4': isScrolledDown }">
-    <div class="w-full flex items-center px-4 md:px-8" :class="{ 'h-8': isScrolledDown, 'h-16': !isScrolledDown }">
-    <a href="/">
-      <img src="/logo.svg" alt="Studio PI" class="transition-all duration-300 ease-out"
-        :class="{ 'w-58 md:w-96': !isScrolledDown, 'w-36 md:w-50': isScrolledDown }" />
-    </a>
+  <header class="sticky top-0 z-50 bg-white transition-all duration-500 ease-out"
+    :style="{ paddingTop: headerPadding + 'px', paddingBottom: headerPadding + 'px' }">
+    <div class="w-full flex items-center px-4 md:px-8">
+      <a href="/">
+        <img src="/logo.svg" alt="Studio PI" class="transition-all duration-500 ease-out"
+          :style="{ width: logoWidth + 'px' }" />
+      </a>
     </div>
   </header>
   <main>
@@ -65,17 +65,29 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const isScrolledDown = ref(false)
+const scrollY = ref(0)
+const headerPadding = ref(32) // Start with 32px padding
+const logoWidth = ref(232) // Start with 232px width (w-58 equivalent)
+
+const SCROLL_THRESHOLD = 50 // Start shrinking after 50px scroll
+const MIN_PADDING = 16 // Minimum padding when fully scrolled
+const MAX_PADDING = 32 // Maximum padding when at top
+const MIN_LOGO_WIDTH = 144 // Minimum logo width (w-36 equivalent)
+const MAX_LOGO_WIDTH = 232 // Maximum logo width (w-58 equivalent)
 
 const handleScroll = () => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+  scrollY.value = window.pageYOffset || document.documentElement.scrollTop
 
-  // Trigger shrink when user scrolls down more than 30px
-  isScrolledDown.value = scrollTop > 16
+  // Calculate smooth interpolation factor (0 to 1)
+  const scrollProgress = Math.min(scrollY.value / SCROLL_THRESHOLD, 1)
+
+  // Smooth interpolation between min and max values
+  headerPadding.value = MAX_PADDING - (MAX_PADDING - MIN_PADDING) * scrollProgress
+  logoWidth.value = MAX_LOGO_WIDTH - (MAX_LOGO_WIDTH - MIN_LOGO_WIDTH) * scrollProgress
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll, { passive: true })
   handleScroll() // Initial check
 })
 
